@@ -1,8 +1,6 @@
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import Avatar from '@mui/material/Avatar';
 import CloudIcon from '@mui/icons-material/Cloud';
 import Grid from '@mui/material/Grid';
 import { useNavigate } from 'react-router-dom';
@@ -10,18 +8,8 @@ import { useNavigate } from 'react-router-dom';
 
 function Navbar(props) {
     const navigate = useNavigate();
-    const metaMsg = props.connected ? "Connected" : "Connect Wallet";
     const redirect = (url) =>{
         navigate(url)
-    }
-    const userAvatar = () =>{
-        if(props.connected)
-        { 
-           return <div onClick={() => {redirect("/profile")}}><Avatar src="/broken-image.jpg"/></div>   
-        }
-        else{
-            return <></>
-        }
     }
     return( 
       <AppBar position="fixed">
