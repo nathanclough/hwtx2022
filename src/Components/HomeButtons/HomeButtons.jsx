@@ -10,7 +10,7 @@ function HomeButtons(props) {
     return (
         <Box sx={{ '& button': { m: 1 } }}>
             <div>
-            <Button onClick={() => {redirect("/tournament/create")}} size="large" variant="contained" align='center'>Create Tournament</Button>
+            <Button onClick={() => {redirect("/tournaments/create")}} size="large" variant="contained" align='center'>Create Tournament</Button>
             </div>
             <div>
             <Button size="large" variant="contained" align='center'>Find Tournament</Button>
