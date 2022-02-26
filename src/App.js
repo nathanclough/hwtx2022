@@ -16,7 +16,7 @@ function App() {
       <div className='App-Page'>
         <Routes>
           <Route path="/" element={<Home/>} />
-          <Route path="/tournamnents/create" element={<CreateTourn/>} />
+          <Route path="/tournaments/create" element={<CreateTourn/>} />
           <Route path="*" element={<div className='App-Page'>Invalid URL</div>}/>
         </Routes>
       </div>  
