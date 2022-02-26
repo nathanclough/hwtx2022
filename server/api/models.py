@@ -9,14 +9,43 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+class Tournaments(db.Model):
+    __tablename__ = 'Tournaments'
+    id = db.Column(db.Integer(), primary_key=True)
+    name = db.Column(db.String(128), nullable=False)
+    game = db.Column(db.String(64), nullable=False)
+    entryCount = db.Column(db.Integer, nullable=True)
+    startTime = db.Column(db.DateTime,nullable=False)
+    entryFee = db.Column(db.Integer,nullable=False)
+    description = db.Column(db.String(256))
+
+    def __repr__(self):
+        return f"Tournament {self.name}"
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def updateEntryCount(self, count):
+        self.entryCount = count
+
+    def updateStartTime(self,time):
+        self.startTime = time
+
+    @classmethod
+    def get_by_text(cls, search):
+        search = f"{search}%"
+        print(search)
+        result = cls.query.filter(cls.name.like(search)).all() 
+        return [(row.name, row.id) for row in result]
 
 class Users(db.Model):
+    __tablename__ = 'Users'
     id = db.Column(db.Integer(), primary_key=True)
     username = db.Column(db.String(32), nullable=False)
     email = db.Column(db.String(64), nullable=False)
-    password = db.Column(db.Text())
-    jwt_auth_active = db.Column(db.Boolean())
-    date_joined = db.Column(db.DateTime(), default=datetime.utcnow)
+    pubkey = db.Column(db.String(), nullable=False)
+    tournament_id = db.Column(db.Integer, db.ForeignKey("Tournaments.id"), nullable=False)
 
     def __repr__(self):
         return f"User {self.username}"
@@ -25,23 +54,8 @@ class Users(db.Model):
         db.session.add(self)
         db.session.commit()
 
-    def set_password(self, password):
-        self.password = generate_password_hash(password)
-
-    def check_password(self, password):
-        return check_password_hash(self.password, password)
-
-    def update_email(self, new_email):
-        self.email = new_email
-
     def update_username(self, new_username):
         self.username = new_username
-
-    def check_jwt_auth_active(self):
-        return self.jwt_auth_active
-
-    def set_jwt_auth_active(self, set_status):
-        self.jwt_auth_active = set_status
 
     @classmethod
     def get_by_id(cls, id):
@@ -75,31 +89,7 @@ class JWTTokenBlocklist(db.Model):
     def save(self):
         db.session.add(self)
         db.session.commit()
+        
 
-class Tournaments(db.Model):
-    id = db.Column(db.Integer(), primary_key=True)
-    name = db.Column(db.String(128), nullable=False)
-    game = db.Column(db.String(64), nullable=False)
-    entryCount = db.Column(db.Integer, nullable=True)
-    startTime = db.Column(db.DateTime,nullable=False)
-    entryFee = db.Column(db.Integer,nullable=False)
-    description = db.Column(db.String(256))
-
-    def __repr__(self):
-        return f"Tournament {self.name}"
-
-    def save(self):
-        db.session.add(self)
-        db.session.commit()
-
-    def updateEntryCount(self, count):
-        self.entryCount = count
-
-    def updateStartTime(self,time):
-        self.startTime = time
-
-    @classmethod
-    def get_by_text(cls, search):
-        return cls.query.filter(cls.name.like(f"{search}%"))
 
 
