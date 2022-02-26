@@ -1,23 +1,22 @@
-import logo from './logo.svg';
+import React from 'react';
+import './index.css';
 import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Navbar from './Components/Navbar/Navbar.jsx';
+import Home from './Pages/HomePage';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div >
+      <BrowserRouter>  
+      <div>
+      <Navbar network="Etherium-testnet" connected={true}/>
+        <Routes>
+          <Route path="/" element={<Home/>} />
+          <Route path="*" element={<div className='App-Page'>Invalid URL</div>}/>
+        </Routes>
+        </div>  
+      </BrowserRouter>
     </div>
   );
 }
