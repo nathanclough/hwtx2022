@@ -16,7 +16,7 @@ class Tournaments(db.Model):
     game = db.Column(db.String(64), nullable=False)
     entryCount = db.Column(db.Integer, nullable=True)
     startTime = db.Column(db.DateTime,nullable=False)
-    entryFee = db.Column(db.Integer,nullable=False)
+    entryFee = db.Column(db.Float,nullable=False)
     description = db.Column(db.String(256))
 
     def __repr__(self):
