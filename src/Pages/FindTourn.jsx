@@ -9,11 +9,7 @@ export default function CustomizedInputBase() {
     <div style={{display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContent: 'space-between', height: '90%', paddingTop:'10px' }}>
     <Paper
       component="form"
-<<<<<<< HEAD
-      sx={{ p: '6px 4px', m:2, display: 'flex', alignItems: 'left', width: 400 }}
-=======
       sx={{ p: '6px 4px', display: 'flex', alignItems: 'left', width: 400, backgroundColor:"lightgray" }}
->>>>>>> JoeyBranch
     >
       <InputBase
         sx={{ ml: 8, flex: 1, color:'black'}}
