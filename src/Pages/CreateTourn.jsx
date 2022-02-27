@@ -4,6 +4,9 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
 import axios from 'axios';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DateTimePicker from '@mui/lab/DateTimePicker';
 
 const instance = axios.create({
     baseURL: 'http://127.0.0.1:5000/api',
@@ -12,7 +15,7 @@ const instance = axios.create({
 
 export default function FormPropsTextFields() {
     const [inputs,updateInputs] = React.useState({ "name":null,"game":null,"size":null,"fee":null,"description":null})
-    
+    const [value, setValue] = React.useState(null);
     const updateState = (name,value) =>{
         inputs[name] = value
         updateInputs(inputs)
@@ -24,8 +27,9 @@ export default function FormPropsTextFields() {
         instance.post('/tournaments/create', {
             name: inputs["name"],
             game: inputs["game"],
-            size: inputs["size"],
-            fee: inputs["fee"],
+            entryCount: parseInt(inputs["size"]),
+            entryFee: parseInt(inputs["fee"]),
+            startTime: value,
             description: inputs["description"]
           }).then(res => {
             console.log(res);
@@ -34,6 +38,7 @@ export default function FormPropsTextFields() {
     }
 
   return (
+      
 <div style={{display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContent: 'space-between', height: '90%' }}>
     <Typography variant="h5" align='center' color = 'black'>
     Tournament registration form
@@ -94,6 +99,17 @@ export default function FormPropsTextFields() {
           value={inputs["description"]}
           onChange={(e) => updateState("description",e.target.value)}
         />
+
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DateTimePicker
+                renderInput={(props) => <TextField {...props} />}
+                label="Tournament Date and Time"
+                value={value}
+                onChange={(newValue) => {
+                setValue(newValue);
+                }}
+            />
+            </LocalizationProvider>
 
       <Button onClick={submit} variant="outlined" justifyContent= 'flex-end'>Submit</Button>
     </div>
