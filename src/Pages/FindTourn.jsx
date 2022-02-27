@@ -6,17 +6,17 @@ import SearchIcon from '@mui/icons-material/Search';
 
 export default function CustomizedInputBase() {
   return (
-    <div style={{display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContent: 'space-between', height: '90%' }}>
+    <div style={{display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContent: 'space-between', height: '90%', paddingTop:'10px' }}>
     <Paper
       component="form"
-      sx={{ p: '6px 4px', display: 'flex', alignItems: 'left', width: 400 }}
+      sx={{ p: '6px 4px', display: 'flex', alignItems: 'left', width: 400, backgroundColor:"lightgray" }}
     >
       <InputBase
-        sx={{ ml: 8, flex: 1 }}
+        sx={{ ml: 8, flex: 1, color:'black'}}
         placeholder="search tournaments"
         inputProps={{ 'aria-label': 'search tournaments' }}
       />
-      <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
+      <IconButton type="submit" sx={{ p: '10px', color:'black' }} aria-label="search">
         <SearchIcon />
       </IconButton>
 

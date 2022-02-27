@@ -4,6 +4,8 @@ import Typography from '@mui/material/Typography';
 import CloudIcon from '@mui/icons-material/Cloud';
 import Grid from '@mui/material/Grid';
 import { useNavigate } from 'react-router-dom';
+import GamingLogo from "../../glogo.png";
+import Avatar from '@mui/material/Avatar';
 
 
 function Navbar(props) {
@@ -14,7 +16,8 @@ function Navbar(props) {
     return( 
       <AppBar position="fixed">
         <Toolbar>
-            <Typography onClick={() => {redirect("/")}} variant="h5" style={{paddingRight: "25px"}} component="div" sx={{ flexGrow: 1, cursor:'pointer'}}>
+            <Avatar src={GamingLogo} onClick={() => {redirect("/")}} sx={{cursor:'pointer'}} variant="square"/>
+            <Typography onClick={() => {redirect("/")}} variant="h5" style={{paddingLeft: "10px"}} component="div" sx={{ flexGrow: 1, cursor:'pointer'}} fontWeight={'bold'}>
                 Secure Gaming
             </Typography> 
             <Grid width={150} container direction={'row'} spacing={1}>
