@@ -6,7 +6,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import axios from 'axios';
 
 const instance = axios.create({
-    baseURL: 'http://127.0.0.1:5000/',
+    baseURL: 'http://127.0.0.1:5000/api',
     timeout: 1000,
     headers: {'Referrer-Policy': 'no-referrer'}  });
 
