@@ -16,7 +16,7 @@ function Logo(props) {
             />
         </div>
         <div>
-            <Typography variant="h2" component="div" gutterBottom align='center' color='black' fontWeight={'bold'} fontFamily='Roboto'>
+            <Typography variant="h2" component="div" gutterBottom align='center' color='black' fontWeight={'bold'}>
             Secure Gaming
             </Typography>
         </div>

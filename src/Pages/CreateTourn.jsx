@@ -19,8 +19,8 @@ async function requestAccount() {
   }
 
 export default function FormPropsTextFields() {
-    const [inputs,updateInputs] = React.useState({ "name":null,"game":null,"size":null,"fee":null,"description":null})
-    const [value, setValue] = React.useState(null);
+    const [inputs,updateInputs] = React.useState({ "name":'',"game":'',"size":'',"fee":'',"description":''})
+    const [value, setValue] = React.useState('');
     const updateState = (name,value) =>{
         inputs[name] = value
         updateInputs(inputs)
@@ -45,7 +45,7 @@ export default function FormPropsTextFields() {
 
   return (
       
-<div style={{display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContent: 'space-between', height: '90%' }}>
+<div style={{display: 'flex', alignItems: 'center', flexDirection: 'column', height: '90%' }}>
     <Typography variant="h5" align='center' color = 'black'>
     Tournament registration form
     </Typography>
@@ -53,7 +53,6 @@ export default function FormPropsTextFields() {
           required
           id="standard-required"
           label="Name of tournament"
-          defaultValue=""
           variant="standard"
           value={inputs["name"]}
           onChange={(e) => updateState("name",e.target.value)}
@@ -63,7 +62,6 @@ export default function FormPropsTextFields() {
           id="standard-required"
           label="Game choice"
           color="info"
-          defaultValue=""
           variant="standard"
           value={inputs["game"]}
           onChange={(e) => updateState("game",e.target.value)}
@@ -91,7 +89,6 @@ export default function FormPropsTextFields() {
           label="Entry Fee"
           type = "number"
           color="info"
-          defaultValue=""
           variant="standard"
           value={inputs["fee"]}
           onChange={(e) => updateState("fee",e.target.value)}
@@ -100,7 +97,6 @@ export default function FormPropsTextFields() {
           id="standard-helperText"
           label="Tournament Description"
           color="info"
-          defaultValue=""
           variant="standard"
           value={inputs["description"]}
           onChange={(e) => updateState("description",e.target.value)}
@@ -117,7 +113,7 @@ export default function FormPropsTextFields() {
             />
             </LocalizationProvider>
 
-      <Button onClick={submit} variant="outlined" justifyContent= 'flex-end'>Submit</Button>
+      <Button onClick={submit} variant="outlined" >Submit</Button>
     </div>
   );
   
