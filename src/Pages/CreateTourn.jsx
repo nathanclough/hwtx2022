@@ -8,6 +8,8 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateTimePicker from '@mui/lab/DateTimePicker';
 import { ethers } from 'ethers'
+import TournamentPrizePool from '../artifacts/contracts/TournamentPrizePool.sol/TournamentPrizePool.json'
+import { CONTRACT_ADDRESS } from '../constants';
 
 const instance = axios.create({
     baseURL: 'http://127.0.0.1:5000/api',
@@ -17,6 +19,8 @@ const instance = axios.create({
 async function requestAccount() {
     await window.ethereum.request({ method: 'eth_requestAccounts' });
   }
+
+
 
 export default function FormPropsTextFields() {
     const [inputs,updateInputs] = React.useState({ "name":'',"game":'',"size":'',"fee":'',"description":''})
@@ -30,6 +34,16 @@ export default function FormPropsTextFields() {
 
         console.log(inputs)
         await requestAccount()
+
+        if(typeof window.ethereum !== 'undefined'){
+          const provider = new ethers.providers.Web3Provider(window.ethereum)
+          const signer = provider.getSigner()
+          const contract = new ethers.Contract(CONTRACT_ADDRESS, TournamentPrizePool.abi, signer)
+          const transaction = await contract.start(parseInt(inputs["size"]),parseInt(inputs["fee"]),inputs["name"])
+          await transaction.wait()
+
+        }
+
         instance.post('/tournaments/create', {
             name: inputs["name"],
             game: inputs["game"],
@@ -44,10 +58,10 @@ export default function FormPropsTextFields() {
     }
 
   return (
-      
-<div style={{display: 'flex', alignItems: 'center', flexDirection: 'column', height: '90%' }}>
+    <div style={{display:'flex',flexDirection:'row',justifyContent:'center',height:'100%'}}>
+<div style={{display: 'flex', alignItems: 'left', flexDirection: 'column', justifyContent: 'space-between', height: '90%' }}>
     <Typography variant="h5" align='center' color = 'black'>
-    Tournament registration form
+    Register
     </Typography>
         <TextField
           required
@@ -114,6 +128,7 @@ export default function FormPropsTextFields() {
             </LocalizationProvider>
 
       <Button onClick={submit} variant="outlined" >Submit</Button>
+    </div>
     </div>
   );
   

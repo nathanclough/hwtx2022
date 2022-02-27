@@ -37,35 +37,73 @@ pragma solidity ^0.8.0;
 
 import "hardhat/console.sol";
 
+enum State{Active,InActive}
 
 contract TournamentPrizePool {
-    string private greeting;
+    string private _name;
     address payable owner;
     uint _fee;
+    uint _maxEntries;
+    State _state;
+    address[100]  _addresses;
+    uint _enteredCount;
     
-    constructor(uint fee) {
-        owner = payable(msg.sender);
-        _fee = fee;
-        console.log("Deploying TournamentPrizePool with entryFee %d",fee);
+
+    constructor(){
+        _state = State.InActive;
     }
 
     receive() external payable {}
     fallback() external payable {}
 
+    function start(uint fee, uint maxEntries, string memory name) public payable{
+        _fee = fee;
+        _maxEntries = maxEntries;
+        _state = State.Active;
+        _enteredCount = 0;
+        _name = name;
+    }
+
+    function name() public view returns(string memory){
+        return _name;
+    }
+
+    function currentEntries() public view returns(uint){
+        return _enteredCount;
+    }
+
     function join() public payable {
         // confirm there is enough funds 
-        require(msg.value == _fee, "Incorrect Fee amount");
+        require(msg.value >= (_fee *(1 ether)), "Incorrect Fee amount");
+        require(_state == State.Active, "Inactive");
 
         // Transfer to address(this)
         bool sent = payable(address(this)).send(msg.value);
         require(sent, "Could not send entry fee");
+
+        _addresses[_enteredCount] = msg.sender;
+        _enteredCount = _enteredCount +1;
     }
 
-    function determineWinners(address first, address second, address third) public {
+    function determineWinners(address first) public {
         // Transfer from address(this) to sender 
-        require(msg.sender ==  0x4B0897b0513fdC7C541B6d9D7E929C4e5364D2dB);
+        require(_state == State.Active, "Inactive");
+        
+        //Signed by account 3
+        require(msg.sender ==  address(0x70997970C51812dc3A010C7d01b50e0d17dc79C8), "Wrong sender");
         
         // Calculate the winners then send funds 
+        // 1st 60%
+        // 2nd 30%
+        // 3rd 10%
+        
+        for(uint i =0; i < _enteredCount; i++){
+            address a = _addresses[i];
+            if(a == first){
+                payable(a).transfer(address(this).balance);
+            }
+        }
 
+        _state = State.InActive;
     }
 }
