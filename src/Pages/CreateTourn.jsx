@@ -7,8 +7,8 @@ import axios from 'axios';
 
 const instance = axios.create({
     baseURL: 'http://127.0.0.1:5000/',
-    timeout: 1000
-  });
+    timeout: 1000,
+    headers: {'Referrer-Policy': 'no-referrer'}  });
 
 export default function FormPropsTextFields() {
     const [inputs,updateInputs] = React.useState({ "name":null,"game":null,"size":null,"fee":null,"description":null})
@@ -20,6 +20,7 @@ export default function FormPropsTextFields() {
 
     const submit = () =>{
         console.log(inputs)
+  
         instance.post('/tournaments/create', {
             name: inputs["name"],
             game: inputs["game"],

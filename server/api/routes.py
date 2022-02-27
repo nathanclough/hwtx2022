@@ -5,7 +5,7 @@ from unicodedata import name
 from datetime import datetime
 from flask import request
 from flask_restx import Api, Resource, fields
-
+from flask_cors import CORS, cross_origin
 import jwt
 
 from .models import db, Tournaments, Users, JWTTokenBlocklist
@@ -109,7 +109,7 @@ class CreateTournament(Resource):
         description=_desc)
 
         new_tournament.save()
-
+        
         return {"success": True,
                 "tournamentId": new_tournament.id,
                 "msg": f"The tournament {_name} was successfully registered"}, 200
