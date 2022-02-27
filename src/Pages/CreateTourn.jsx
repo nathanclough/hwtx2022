@@ -3,7 +3,12 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
+import axios from 'axios';
 
+const instance = axios.create({
+    baseURL: 'http://127.0.0.1:5000/',
+    timeout: 1000
+  });
 
 export default function FormPropsTextFields() {
     const [inputs,updateInputs] = React.useState({ "name":null,"game":null,"size":null,"fee":null,"description":null})
@@ -15,8 +20,17 @@ export default function FormPropsTextFields() {
 
     const submit = () =>{
         console.log(inputs)
+        instance.post('/tournaments/create', {
+            name: inputs["name"],
+            game: inputs["game"],
+            size: inputs["size"],
+            fee: inputs["fee"],
+            description: inputs["description"]
+          }).then(res => {
+            console.log(res);
+            console.log(res.data);
+          })
     }
-
 
   return (
 <div style={{display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContent: 'space-between', height: '90%' }}>
