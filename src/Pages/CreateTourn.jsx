@@ -96,7 +96,7 @@ export default function FormPropsTextFields() {
         <TextField
           required
           InputProps={{
-            startAdornment: <InputAdornment position="start">$</InputAdornment>
+            startAdornment: <InputAdornment position="start">ETH</InputAdornment>
           }}
           id="standard-required"
           label="Entry Fee"
