@@ -17,6 +17,9 @@ function Logo(props) {
         </div>
         <div>
             <Typography variant="h2" component="div" gutterBottom align='center' color='black' fontWeight={'bold'}>
+            TournaNet
+            </Typography>
+            <Typography variant="h4" component="div" gutterBottom align='center' color='black'>
             Secure Gaming
             </Typography>
         </div>

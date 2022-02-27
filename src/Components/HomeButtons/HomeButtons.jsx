@@ -15,6 +15,12 @@ function HomeButtons(props) {
             <div>
             <Button onClick={() => {redirect("/tournaments/find")}} size="large" variant="contained" align='center' fontWeight={'bold'}>Find Tournament</Button>
             </div>
+            <div>
+            <Button onClick={() => {redirect("/tournaments/join")}} size="large" variant="contained" align='bottom' fontWeight={'bold'}>Join Tournament</Button>
+            </div>
+            <div>
+            <Button onClick={() => {redirect("/tournaments/verify")}} size="large" variant="contained" align='center' fontWeight={'bold'}>Verify Results</Button>
+            </div>
         </Box>
     );
 }export default HomeButtons;
