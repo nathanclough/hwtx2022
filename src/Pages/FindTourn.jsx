@@ -9,7 +9,7 @@ export default function CustomizedInputBase() {
     <div style={{display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContent: 'space-between', height: '90%' }}>
     <Paper
       component="form"
-      sx={{ p: '6px 4px', m:5, display: 'flex', alignItems: 'left', width: 400 }}
+      sx={{ p: '6px 4px', m:2, display: 'flex', alignItems: 'left', width: 400 }}
     >
       <InputBase
         sx={{ ml: 8, flex: 1 }}
