@@ -68,8 +68,9 @@ export default function FormPropsTextFields() {
           id="standard-required"
           label="Name of tournament"
           variant="standard"
-          value={inputs["name"]}
-          onChange={(e) => updateState("name",e.target.value)}
+          onChange={(e) => {updateState("name",e.target.value)
+          console.log("evenet",e);    
+        }}
         />
         <TextField
           required
@@ -77,7 +78,6 @@ export default function FormPropsTextFields() {
           label="Game choice"
           color="info"
           variant="standard"
-          value={inputs["game"]}
           onChange={(e) => updateState("game",e.target.value)}
         />
         <TextField
@@ -91,7 +91,6 @@ export default function FormPropsTextFields() {
             shrink: true,
           }}
           variant="standard"
-          value={inputs["size"]}
           onChange={(e) => updateState("size",e.target.value)}
         />
         <TextField
@@ -104,7 +103,6 @@ export default function FormPropsTextFields() {
           type = "number"
           color="info"
           variant="standard"
-          value={inputs["fee"]}
           onChange={(e) => updateState("fee",e.target.value)}
         />
         <TextField
@@ -112,7 +110,6 @@ export default function FormPropsTextFields() {
           label="Tournament Description"
           color="info"
           variant="standard"
-          value={inputs["description"]}
           onChange={(e) => updateState("description",e.target.value)}
         />
 
@@ -120,7 +117,6 @@ export default function FormPropsTextFields() {
             <DateTimePicker
                 renderInput={(props) => <TextField {...props} />}
                 label="Tournament Date and Time"
-                value={value}
                 onChange={(newValue) => {
                 setValue(newValue);
                 }}
