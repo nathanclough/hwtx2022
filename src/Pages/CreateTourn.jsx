@@ -23,7 +23,7 @@ async function requestAccount() {
 
 
 export default function FormPropsTextFields() {
-    const [inputs,updateInputs] = React.useState({ "name":'',"game":'',"size":'',"fee":'',"description":''})
+    const [inputs,updateInputs] = React.useState({ "name":null,"game":null,"size":null,"fee":null,"description":null})
     const [value, setValue] = React.useState(null);
     const updateState = (name,value) =>{
         inputs[name] = value
@@ -68,8 +68,8 @@ export default function FormPropsTextFields() {
           id="standard-required"
           label="Name of tournament"
           variant="standard"
-          onChange={(e) => {updateState("name",e.target.value)
-          console.log("evenet",e);    
+          onChange={(e) => {
+            updateState("name",e.target.value)
         }}
         />
         <TextField
@@ -117,6 +117,7 @@ export default function FormPropsTextFields() {
             <DateTimePicker
                 renderInput={(props) => <TextField {...props} />}
                 label="Tournament Date and Time"
+                value={value}
                 onChange={(newValue) => {
                 setValue(newValue);
                 }}
