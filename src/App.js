@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Navbar from './Components/Navbar/Navbar.jsx';
 import Home from './Pages/HomePage';
 import CreateTourn from './Pages/CreateTourn';
+import FindTourn from './Pages/FindTourn';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/tournaments/create" element={<CreateTourn/>} />
+          <Route path="/tournaments/find" element={<FindTourn/>} />
           <Route path="*" element={<div className='App-Page'>Invalid URL</div>}/>
         </Routes>
       </div>  

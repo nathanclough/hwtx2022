@@ -6,17 +6,17 @@ import Typography from '@mui/material/Typography';
 
 function Logo(props) {
   return (
-    <Box sx={{ '& button': { m: 1 } }}>
+    <Box sx={{ '& button': { m: 1 }, backgroundColor:'white'}}>
         <div>
             <CardMedia
             component="img"
-            style={{backgroundColor: "cyan"}}
+            style={{backgroundColor: "white"}}
             image={GamingLogo}
             alt="logo"
             />
         </div>
         <div>
-            <Typography variant="h2" component="div" gutterBottom align='center'>
+            <Typography variant="h2" component="div" gutterBottom align='center' color='black'>
             Secure Gaming
             </Typography>
         </div>

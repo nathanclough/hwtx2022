@@ -14,10 +14,10 @@ function Navbar(props) {
     return( 
       <AppBar position="fixed">
         <Toolbar>
-            <Typography onClick={() => {redirect("/")}} variant="h5" style={{paddingRight: "25px"}} component="div" sx={{ flexGrow: 1 }}>
+            <Typography onClick={() => {redirect("/")}} variant="h5" style={{paddingRight: "25px"}} component="div" sx={{ flexGrow: 1, cursor:'pointer'}}>
                 Secure Gaming
             </Typography> 
-            <Grid container spacing={1}direction="row" alignItems="center" >
+            <Grid width={150} container direction={'row'} spacing={1}>
                 <Grid item>
                     <CloudIcon fontSize="small"/>
                 </Grid>
