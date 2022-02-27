@@ -1,6 +1,5 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
-import TournamentPrizePool from './artifacts/contracts/Greeter.sol/TournamentPrizePool'
 
 // describe("Greeter", function () {
 //   it("Should return the new greeting once it's changed", async function () {
@@ -24,8 +23,11 @@ describe("TournamentPrizePool", function() {
   it("Fee is correct contract locks tokens", async function () {
     const TournamentPrizePools = await ethers.getContractFactory("TournamentPrizePool");
 
-    const tournamentPrizePool = await TournamentPrizePools.deploy(5)
+    const tournamentPrizePool = await TournamentPrizePools.deploy()
     await tournamentPrizePool.deployed()
-    await tournamentPrizePool.join()
+
+    expect(tournamentPrizePool._state === '')
+    await tournamentPrizePool.start(2,8)
+
   })
 })

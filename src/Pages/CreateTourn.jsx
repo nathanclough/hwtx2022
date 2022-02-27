@@ -8,7 +8,9 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateTimePicker from '@mui/lab/DateTimePicker';
 import { ethers } from 'ethers'
+import TournamentPrizePool from '../artifacts/contracts/TournamentPrizePool.sol/TournamentPrizePool.json'
 
+const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
 const instance = axios.create({
     baseURL: 'http://127.0.0.1:5000/api',
     timeout: 1000,
@@ -17,6 +19,8 @@ const instance = axios.create({
 async function requestAccount() {
     await window.ethereum.request({ method: 'eth_requestAccounts' });
   }
+
+
 
 export default function FormPropsTextFields() {
     const [inputs,updateInputs] = React.useState({ "name":null,"game":null,"size":null,"fee":null,"description":null})
@@ -30,6 +34,16 @@ export default function FormPropsTextFields() {
 
         console.log(inputs)
         await requestAccount()
+
+        if(typeof window.ethereum !== 'undefined'){
+          const provider = new ethers.providers.Web3Provider(window.ethereum)
+          const signer = provider.getSigner()
+          const contract = new ethers.Contract(contractAddress, TournamentPrizePool.abi, signer)
+          const transaction = await contract.start(parseInt(inputs["size"]),parseInt(inputs["fee"]))
+          await transaction.wait()
+
+        }
+
         instance.post('/tournaments/create', {
             name: inputs["name"],
             game: inputs["game"],

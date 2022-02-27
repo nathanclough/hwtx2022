@@ -15,7 +15,7 @@ async function main() {
 
   // We get the contract to deploy
   const Greeter = await hre.ethers.getContractFactory("TournamentPrizePool");
-  const greeter = await Greeter.deploy(5);
+  const greeter = await Greeter.deploy();
 
   await greeter.deployed();
 

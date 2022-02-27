@@ -37,24 +37,32 @@ pragma solidity ^0.8.0;
 
 import "hardhat/console.sol";
 
+enum State{Active,InActive}
 
 contract TournamentPrizePool {
     string private greeting;
     address payable owner;
     uint _fee;
-    
-    constructor(uint fee) {
-        owner = payable(msg.sender);
-        _fee = fee;
-        console.log("Deploying TournamentPrizePool with entryFee %d",fee);
+    uint _maxEntries;
+    State _state;
+
+    constructor(){
+        _state = State.InActive;
     }
 
     receive() external payable {}
     fallback() external payable {}
 
+    function start(uint fee, uint maxEntries) public payable{
+        _fee = fee;
+        _maxEntries = maxEntries;
+        _state = State.Active;
+    }
+
     function join() public payable {
         // confirm there is enough funds 
         require(msg.value == _fee, "Incorrect Fee amount");
+        require(_state == State.Active, "Inactive");
 
         // Transfer to address(this)
         bool sent = payable(address(this)).send(msg.value);
@@ -63,9 +71,14 @@ contract TournamentPrizePool {
 
     function determineWinners(address first, address second, address third) public {
         // Transfer from address(this) to sender 
+        require(_state == State.Active, "Inactive");
         require(msg.sender ==  0x4B0897b0513fdC7C541B6d9D7E929C4e5364D2dB);
         
         // Calculate the winners then send funds 
+        // 1st 60%
+        // 2nd 30%
+        // 3rd 10%
 
+        _state = State.InActive;
     }
 }
