@@ -28,7 +28,7 @@ export default function FormPropsTextFields() {
             name: inputs["name"],
             game: inputs["game"],
             entryCount: parseInt(inputs["size"]),
-            entryFee: parseInt(inputs["fee"]),
+            entryFee: parseFloat(inputs["fee"]),
             startTime: value,
             description: inputs["description"]
           }).then(res => {

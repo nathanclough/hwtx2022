@@ -31,7 +31,7 @@ tournament_model = rest_api.model('TournamentModel',{
                                                         "game":fields.String(required=True, max_length=64),
                                                         "entryCount":fields.Integer(required=True),
                                                         "startTime":fields.DateTime(required=True, dt_format='iso8602'),
-                                                        "entryFee":fields.Integer(required=True),
+                                                        "entryFee":fields.Float(required=True),
                                                         "description":fields.String(required=False,max_length=256)
                                                     })
 
@@ -40,7 +40,7 @@ tournament_search_model = rest_api.model('TournamentSearchModel',{
                                                         "game":fields.String(required=False, max_length=64),
                                                         "entryCount":fields.Integer(required=False),
                                                         "startTime":fields.DateTime(required=False, dt_format='iso8602'),
-                                                        "entryFee":fields.Integer(required=False),
+                                                        "entryFee":fields.Float(required=False),
                                                         "description":fields.String(required=False,max_length=256)
                                                     })
 
