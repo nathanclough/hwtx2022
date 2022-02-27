@@ -24,7 +24,7 @@ async function requestAccount() {
 
 export default function FormPropsTextFields() {
     const [inputs,updateInputs] = React.useState({ "name":'',"game":'',"size":'',"fee":'',"description":''})
-    const [value, setValue] = React.useState('');
+    const [value, setValue] = React.useState(null);
     const updateState = (name,value) =>{
         inputs[name] = value
         updateInputs(inputs)
