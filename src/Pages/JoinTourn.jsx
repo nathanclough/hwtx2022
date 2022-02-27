@@ -40,7 +40,7 @@ export default function JoinTourn() {
           const provider = new ethers.providers.Web3Provider(window.ethereum)
           const signer = provider.getSigner()
           const contract = new ethers.Contract(CONTRACT_ADDRESS, TournamentPrizePool.abi, signer)
-          const transaction = await contract.join({ value: ethers.utils.parseEther("5") })
+          const transaction = await contract.join({ value: ethers.utils.parseEther("6") })
           await transaction.wait()
         
         }
