@@ -7,11 +7,16 @@ import axios from 'axios';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateTimePicker from '@mui/lab/DateTimePicker';
+import { ethers } from 'ethers'
 
 const instance = axios.create({
     baseURL: 'http://127.0.0.1:5000/api',
     timeout: 1000,
     headers: {'Referrer-Policy': 'no-referrer'}  });
+
+async function requestAccount() {
+    await window.ethereum.request({ method: 'eth_requestAccounts' });
+  }
 
 export default function FormPropsTextFields() {
     const [inputs,updateInputs] = React.useState({ "name":null,"game":null,"size":null,"fee":null,"description":null})
@@ -20,10 +25,11 @@ export default function FormPropsTextFields() {
         inputs[name] = value
         updateInputs(inputs)
     }
-
-    const submit = () =>{
-        console.log(inputs)
   
+    const submit = async () =>{
+
+        console.log(inputs)
+        await requestAccount()
         instance.post('/tournaments/create', {
             name: inputs["name"],
             game: inputs["game"],
@@ -34,7 +40,7 @@ export default function FormPropsTextFields() {
           }).then(res => {
             console.log(res);
             console.log(res.data);
-          })
+        })
     }
 
   return (
