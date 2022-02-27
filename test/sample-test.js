@@ -29,5 +29,7 @@ describe("TournamentPrizePool", function() {
     expect(tournamentPrizePool._state === '')
     await tournamentPrizePool.start(2,8)
 
+    await tournamentPrizePool.join({ value: ethers.utils.parseEther("2") })
+
   })
 })

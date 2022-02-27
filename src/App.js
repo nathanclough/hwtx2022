@@ -7,13 +7,15 @@ import Home from './Pages/HomePage';
 import CreateTourn from './Pages/CreateTourn';
 import FindTourn from './Pages/FindTourn';
 import InfoTourn from './Pages/InfoTourn.jsx';
+import JoinTourn from './Pages/JoinTourn';
+import VerifyTourn from './Pages/VerifyTourn.jsx';
 
 function App() {
   return (
     <div >
       <BrowserRouter>  
       <div className='App-Header'>
-      <Navbar network="Etherium-testnet" connected={true} className="App-Header"/>
+      <Navbar network="Ethereum-testnet" connected={true} className="App-Header"/>
       </div>
       <div className='App-Page'>
         <Routes>
@@ -21,6 +23,8 @@ function App() {
           <Route path="/tournaments/create" element={<CreateTourn/>} />
           <Route path="/tournaments/find" element={<FindTourn/>} />
           <Route path="/tournaments/info" element={<InfoTourn/>} />
+          <Route path="/tournaments/join" element={<JoinTourn/>}/>
+          <Route path="/tournaments/verify" element={<VerifyTourn/>}/>
           <Route path="*" element={<div className='App-Page'>Invalid URL</div>}/>
         </Routes>
       </div>  
